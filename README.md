@@ -1,240 +1,76 @@
 # maternal-health-analysis-using-python
 
-**Learning Together. Analysing Data. Creating Impact.**
-
-Pairbud is a collaborative data analytics project focused on exploring maternal healthcare indicators in Nigeria using Python and data from the Nigeria Demographic and Health Survey (NDHS).
-
-The project applies data inspection, cleaning, transformation and statistical data preparation techniques to examine maternal healthcare indicators and explore the socioeconomic factors associated with maternal healthcare utilisation.
-
----
-
-## About the Project
-
-Maternal healthcare remains an important public health priority in Nigeria. Access to essential maternal health services can vary according to socioeconomic circumstances, educational attainment, household wealth and geographical location.
-
-This project uses Python to explore maternal health data, identify relevant indicators, prepare datasets for analysis and develop a foundation for understanding patterns in maternal healthcare utilisation.
-
-Through this project, the Pairbud team demonstrates how programming and data analytics can contribute to public health research and evidence-informed decision-making.
-
-## Project Objectives
-
-The project seeks to:
-
-- Explore maternal healthcare indicators within the NDHS dataset.
-- Examine maternal healthcare utilisation across different socioeconomic groups.
-- Investigate differences associated with educational attainment, household wealth and place of residence.
-- Assess antenatal care attendance and delivery-related indicators.
-- Apply appropriate data cleaning and preparation techniques.
-- Develop a structured dataset for subsequent statistical analysis.
-
-## Tools and Technologies
-
-The project uses the following Python tools and technologies:
-
-| Tool | Application |
-|---|---|
-| Python | Primary programming language |
-| Pandas | Data manipulation and cleaning |
-| NumPy | Numerical operations |
-| Matplotlib | Data visualisation |
-| Pyreadstat | Reading Stata datasets and metadata |
-| Samplics | Complex survey analysis |
-| Jupyter Notebook | Interactive analysis and documentation |
 
 ## Project Workflow and Documentation
 
-The analysis follows a structured data preparation workflow. The following sections document the practical work undertaken by the team.
-
 ### 1. Data Inspection and Understanding
 
-The initial stage involved importing the NDHS Stata dataset, examining its structure, inspecting the first few records and understanding the available variables.
+The project began with importing the original NDHS Stata dataset using Pandas. We examined its structure, dimensions, columns and initial observations to understand the available data.
 
-The original dataset contained 39,050 records and 6,411 columns.
+![Initial Data Inspection](images/Screenshot%202026-11-13%20211851.png)
 
-**Notebook documentation:**
-
-![Data Inspection](images/01-data-inspection.png)
+![Dataset Exploration](images/Screenshot%202026-11-13%20212027.png)
 
 ### 2. Identification of Relevant Variables
 
-The team examined the available dataset variables to identify indicators relevant to the project's maternal healthcare objectives.
+We explored the available maternal health variables and identified indicators relevant to the research objectives. The variable identification process involved examining variables beginning with the prefix `m` and selecting relevant indicators for further investigation.
 
-A broader variable-matching exercise identified 1,940 variables beginning with the prefix `m`, from which relevant maternal health indicators were selected for further investigation.
+![Maternal Variable Identification](images/Screenshot%202026-11-13%20212105.png)
 
-**Notebook documentation:**
-
-![Variable Identification](images/02-variable-identification.png)
+![Selection of Relevant Variables](images/Screenshot%202026-11-13%20212114.png)
 
 ### 3. Data Extraction and Preparation
 
-A smaller working dataset was created by extracting selected variables from the original dataset.
+A smaller working dataset was created by extracting the selected variables from the original dataset. The resulting dataset was examined to verify its dimensions and structure.
 
-The initial selection contained nine variables, covering respondent characteristics, socioeconomic indicators and maternal health information.
+![Maternal Dataset Extraction](images/Screenshot%202026-11-13%20212152.png)
 
-**Notebook documentation:**
+![Dataset Structure and Information](images/Screenshot%202026-11-13%20212202.png)
 
-![Data Extraction](images/03-data-extraction.png)
+### 4. Understanding Variable Metadata
 
-### 4. Missing Value Assessment
+Pyreadstat was installed and used to access the dataset's metadata, including variable descriptions and value labels. This helped the team understand the numerical codes attached to the selected maternal health indicators.
 
-The team investigated missing-value patterns across the selected maternal health variables to understand the extent and distribution of incomplete observations.
+![Pyreadstat Installation and Metadata Access](images/Screenshot%202026-11-13%20212219.png)
 
-This process identified 25,082 records with all four initially selected maternal health variables missing and 13,968 records with at least one available maternal health variable.
+![Variable Labels and Value Codes](images/Screenshot%202026-11-13%20212231.png)
 
-A separate analysis dataset was subsequently prepared using three core maternal health variables.
+### 5. Missing Value Assessment
 
-**Notebook documentation:**
+The team investigated missing-value patterns across the selected maternal health variables. This involved identifying records with incomplete information and preparing a separate dataset for subsequent maternal health analysis.
 
-![Missing Value Assessment](images/04-missing-values.png)
+![Missing Value Assessment](images/Screenshot%202026-11-13%20212241.png)
 
-### 5. Data Cleaning and Transformation
+![Maternal Analysis Dataset Preparation](images/Screenshot%202026-11-13%20212256.png)
 
-Data cleaning involved identifying special response codes, replacing inappropriate or unknown responses with missing values, renaming variables and transforming numerical codes into more meaningful categories.
+### 6. Data Cleaning and Transformation
 
-The selected variables were converted into readable classifications to support interpretation and subsequent analysis.
+The cleaning process involved examining invalid values, handling special response codes and replacing inappropriate or unknown responses with missing values.
 
-Examples include:
+Selected variables were renamed and transformed into meaningful categories to improve readability and interpretation.
 
-- Residence: Urban and Rural.
-- Education: No education, Primary, Secondary and Higher.
-- Tetanus injections: Categorised according to the number of injections received.
-- Antenatal care: Number of antenatal visits.
-- Delivery location: Grouped into relevant delivery facility categories.
-- Caesarean section: Yes and No.
+![Invalid Value Assessment](images/Screenshot%202026-11-13%20212306.png)
 
-**Notebook documentation:**
+![Handling Special Missing Values](images/Screenshot%202026-11-13%20212317.png)
 
-![Data Cleaning](images/05-data-cleaning.png)
+![Residence and Education Recoding](images/Screenshot%202026-11-13%20212328.png)
 
-### 6. Data Validation
+![Maternal Health Variable Transformation](images/Screenshot%202026-11-13%20212338.png)
 
-Following data cleaning and transformation, the team examined unique values and category distributions to assess the consistency of the processed variables.
+![Delivery Location and Caesarean Section Classification](images/Screenshot%202026-11-13%20212348.png)
 
-This stage helped verify the recoded categories and identify potential data inconsistencies before proceeding to further analysis.
+### 7. Data Validation
 
-**Notebook documentation:**
+Following the cleaning and transformation stages, the team examined the resulting categories and their distributions to assess the consistency of the processed dataset.
 
-![Data Validation](images/06-data-validation.png)
+![Validation of Cleaned Categories](images/Screenshot%202026-11-13%20212400.png)
 
-### 7. Survey Design Inspection
+### 8. Survey Design Inspection and Weighted Analysis Preparation
 
-The project also examined the survey-design variables required for complex survey analysis.
+The project examined the survey-design variables required for complex survey analysis, including sampling weights, primary sampling units (clusters) and strata.
 
-These included:
+The dataset contained 1,368 unique clusters and 74 unique strata. These variables were inspected to support the preparation of survey-weighted analysis.
 
-- Sampling weights (`v005`)
-- Primary sampling units or clusters (`v021`)
-- Sampling strata (`v022`)
+![Survey Design Validation](images/Screenshot%202026-11-13%20212415.png)
 
-The dataset contained 1,368 unique clusters and 74 unique strata.
-
-This inspection provided the foundation for incorporating the survey design appropriately into subsequent statistical analysis.
-
-**Notebook documentation:**
-
-![Survey Design Inspection](images/07-survey-design.png)
-
----
-
-## Dataset Summary
-
-The following table summarises the key figures obtained during the data preparation stage.
-
-| Description | Result |
-|---|---:|
-| Original dataset records | 39,050 |
-| Original dataset columns | 6,411 |
-| Initially selected variables | 9 |
-| Records with at least one available maternal variable | 13,968 |
-| Records retained for the three core maternal variables | 13,968 |
-| Identified survey clusters | 1,368 |
-| Identified survey strata | 74 |
-
-*Note: These figures describe different stages of dataset inspection and preparation. They should not be interpreted as final analytical findings or as the sample size for every subsequent analysis.*
-
-## Project Structure
-
-The repository is organised to maintain a clear separation between datasets, analytical notebooks, documentation and supporting images.
-
-```text
-maternal-health-analysis-using-python/
-│
-├── data/
-│
-├── notebooks/
-│
-├── documentation/
-│
-├── images/
-│   ├── 01-data-inspection.png
-│   ├── 02-variable-identification.png
-│   ├── 03-data-extraction.png
-│   ├── 04-missing-values.png
-│   ├── 05-data-cleaning.png
-│   ├── 06-data-validation.png
-│   └── 07-survey-design.png
-│
-├── requirements.txt
-├── .gitignore
-└── README.md
-```
-
-## Getting Started
-
-To explore and reproduce the project workflow:
-
-**1. Clone the repository**
-
-```bash
-git clone https://github.com/Promise-Steve/maternal-health-analysis-using-python.git
-```
-
-**2. Navigate into the project directory**
-
-```bash
-cd maternal-health-analysis-using-python
-```
-
-**3. Install the required dependencies**
-
-```bash
-pip install -r requirements.txt
-```
-
-**4. Access the project notebook**
-
-Navigate to the `notebooks/` directory and open the relevant Jupyter Notebook.
-
-```bash
-jupyter notebook
-```
-
-**5. Access the dataset**
-
-The original NDHS microdata is not distributed with this repository. Researchers should obtain the appropriate access authorisation through the DHS Program before attempting to reproduce the analysis.
-
-## Project Status
-
-The project has completed its initial data inspection, variable identification, data extraction, missing-value assessment, cleaning, transformation and validation stages.
-
-The prepared dataset provides a foundation for subsequent maternal health statistical analysis and visualisation.
-
-## Contributors
-
-**Pairbud Project Team**
-
-A collaborative learning initiative focused on applying Python programming and data analytics to real-world public health research.
-
-GitHub Repository: [Maternal Health Analysis Using Python](https://github.com/Promise-Steve/maternal-health-analysis-using-python)
-
-## Acknowledgements
-
-We acknowledge the Demographic and Health Surveys (DHS) Program and the relevant Nigerian survey authorities for making the survey data available for research purposes.
-
-We also appreciate the Python Study Group community for encouraging collaborative learning, practical programming and the application of data analytics to real-world challenges.
-
----
-
-**PAIRBUD**
-
-*Learning Together. Building Together. Creating Impact.*
+![Weighted Delivery Analysis Preparation](images/Screenshot%202026-11-13%20212618.png)
